@@ -1,14 +1,15 @@
-    package com.agape.activitycommunication
+package com.agape.activitycommunication
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.agape.activitycommunication.data.Car
 import com.agape.activitycommunication.data.Person
 import com.agape.activitycommunication.databinding.ActivityMainBinding
 
-    class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity() {
+    private val REQUEST_CODE = 124
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +43,18 @@ import com.agape.activitycommunication.databinding.ActivityMainBinding
         }
 
         binding.button4.setOnClickListener {
-            //Sending data through application class
-            val app = application as ApplicationClass
-            app.globalVariable = "Data updated from Sender Activity"
+            val intent2 = Intent(this, SecondActivity::class.java)
+            startActivityForResult(intent2, REQUEST_CODE)        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE  && resultCode == RESULT_OK){
+            val res: String? = data?.getStringExtra("result")
+            if (res != null){
+                binding.tv1.visibility = View.VISIBLE
+                binding.tv1.text = res
+            }
         }
     }
 }

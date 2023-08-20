@@ -1,5 +1,6 @@
 package com.agape.activitycommunication
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -40,5 +41,12 @@ class SecondActivity : AppCompatActivity() {
         }
         if (parcelableData != null)
             Toast.makeText(this, parcelableData.toString(), Toast.LENGTH_SHORT).show()
+
+        binding.button1.setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra("result", "Sample result text")
+            setResult(RESULT_OK, resultIntent)
+            finish()
+        }
     }
 }
