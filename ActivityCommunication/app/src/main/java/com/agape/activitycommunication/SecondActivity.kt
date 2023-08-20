@@ -35,7 +35,7 @@ class SecondActivity : AppCompatActivity() {
 
         // Receiving Parcelable data from the sending activity
         val parcelableData: Car? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("parcelableData", Car::class.java)
+            intent.getParcelableExtra("car", Car::class.java)
         } else {
             intent.getParcelableExtra("car") as? Car
         }
